@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>单页应用</title>
+		<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+	</head>
+
+	<body>
+		<h1>我只一个简单的单页应用</h1>
+		<div id="main"></div>
+		<div id="bottom">
+			<a href="#home">首页</a>
+			<a href="#fund">基金</a>
+			<a href="#me">我</a>
+		</div>
+	</body>
+	<script>
+		window.onhashchange = function() { //监听hash值变化，实现页面变换
+			var hash = window.location.hash;　　
+			changePage(hash);
+		}
+
+		function changePage(hash) {　　
+			switch (hash)　　 {　　
+				case '#home':
+					page_url = 'page/home.html';　　　　
+					break;　　
+				case '#fund':
+					page_url = 'page/fund.html';　　　　
+					break;　　
+				case '#me':
+					page_url = 'page/me.html';　　　　
+					break;　　
+			}　　
+			debugger
+			htmlobj=$.ajax({url:page_url,async:false});
+      		$("#main").html(htmlobj.responseText);
+/*			$.ajax({ //根据hash值选择页面
+				type: 'GET',
+				url: page_url,
+				async:false,
+				success: function(data) {　　　　　　
+					//$()main.innerHTML = data;　
+					$("#main").html(data);　　　　
+				}　　
+			});*/
+		}
+	</script>
+</html>
